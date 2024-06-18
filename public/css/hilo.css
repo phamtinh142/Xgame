@@ -1,0 +1,1291 @@
+.bonus-room .game-content {
+  padding: 0;
+}
+
+/* css for hilo.css */
+@font-face {
+  font-family: 'Hilo Icons';
+  src: url(/fonts/hilo/icomoon.eot?v=90a0497b9fbf7757131457e7af96ec6b);
+  src: url(/fonts/hilo/icomoon.eot?v=90a0497b9fbf7757131457e7af96ec6b#iefix) format('embedded-opentype'),
+    url(/fonts/hilo/icomoon.ttf?v=9409b05db04e10dfd384c362c949f0aa) format('truetype'),
+    url(/fonts/hilo/icomoon.woff?v=32db94148b57a58b72e3a920c393397a) format('woff'),
+    url(/font/hilo/icomoon.svg?v=bb3d6844da1284a294110530a33e754c#icomoon) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.hilo-game {
+  min-height: 670px;
+  border-radius: 0 0 0.25rem 0.25rem;
+  background-color: #363636;
+}
+.hilo-game__gaming-area {
+  position: relative;
+  padding: 0.1px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.hilo-game__animation-stage {
+  position: relative;
+  margin-top: 15px;
+}
+.hilo-game__main-region {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  padding: 0 15px;
+}
+.hilo-game__deck-region {
+  -ms-flex-preferred-size: 33.3333%;
+  flex-basis: 33.3333%;
+  /* position: relative; */
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.hilo-game__side {
+  -ms-flex-preferred-size: 33.3333%;
+  flex-basis: 33.3333%;
+}
+.hilo-game__statistics-region {
+  padding: 1rem 15px;
+}
+
+.hilo-card {
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#ffffff), to(#d3d3d3));
+  background-image: linear-gradient(to top, #ffffff, #d3d3d3);
+  font-family: 'Hilo Icons', 'PT Sans', sans-serif;
+  cursor: pointer;
+  position: relative;
+}
+.hilo-card_bordered:after {
+  content: '';
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  bottom: 1rem;
+  right: 1rem;
+  border: 2px solid currentColor;
+  border-radius: 24px;
+}
+.hilo-card_diamonds,
+.hilo-card_hearts {
+  color: #fb0f42;
+}
+.hilo-card_red {
+  color: #fb0f42 !important;
+}
+.hilo-card_spades,
+.hilo-card_clubs {
+  color: black;
+}
+.hilo-card_black {
+  color: black !important;
+}
+.hilo-card_joker {
+  background-image: -webkit-gradient(linear, left top, right top, from(#0062f4), to(#009ddd));
+  background-image: linear-gradient(to right, #0062f4, #009ddd);
+}
+.hilo-card_joker .hilo-card__sign {
+  font-size: 0.65em;
+}
+.hilo-card_sm {
+  width: 40px;
+  height: 64px;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  border-radius: 3px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 40px;
+  font-weight: bold;
+}
+.hilo-card__knife {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 78px;
+  height: 196px;
+}
+.hilo-card__label {
+  font-size: 64px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  position: absolute;
+}
+.hilo-card__label_top {
+  top: 1rem;
+  left: 2rem;
+}
+.hilo-card__label_bottom {
+  bottom: 1.2rem;
+  right: 2rem;
+}
+.hilo-card__sign {
+  line-height: normal;
+}
+.hilo-deck {
+  /* width: 100%;
+        margin-left: calc(100% - 205px); */
+  width: 205px;
+  height: 370px;
+  margin: 0 auto;
+}
+.hilo-deck > .hilo-deck-card {
+  border-radius: 24px;
+}
+.hilo-deck__placeholder-card:nth-child(1) {
+  /* top: 112px; */
+  top: 132px;
+  z-index: 5;
+}
+.hilo-deck__placeholder-card:nth-child(2) {
+  /* top: 116px;  */
+  top: 136px;
+  z-index: 4;
+}
+.hilo-deck__placeholder-card:nth-child(3) {
+  /* top: 120px;  */
+  top: 140px;
+  z-index: 3;
+}
+.hilo-deck__placeholder-card:nth-child(4) {
+  /* top: 126px;  */
+  top: 146px;
+  z-index: 2;
+}
+.hilo-deck__placeholder-card:nth-child(5) {
+  /* top: 130px;  */
+  top: 150px;
+  z-index: 1;
+}
+
+.hilo-deck-card {
+  width: 205px;
+  height: 320px;
+  -webkit-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  position: absolute;
+  z-index: 8;
+  /* top: 108px; */
+  top: 128px;
+}
+.hilo-deck-card__countdown-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* -webkit-transform: translate(-50%, -50%) scale(-1, 1);
+                  transform: translate(-50%, -50%) scale(-1, 1);
+            */
+  -webkit-transform: translate(-50%, -50%) scale(1, 1);
+  transform: translate(-50%, -50%) scale(1, 1);
+}
+.hilo-deck-card__countdown {
+  -webkit-transform-origin: center center;
+  transform-origin: center center;
+}
+.hilo-deck-card__flipper {
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  height: 100%;
+  -webkit-transform-origin: center center;
+  transform-origin: center center;
+}
+.hilo-deck-card__back,
+.hilo-deck-card__front {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 24px;
+  -webkit-box-shadow: 0 1px 4px 0 rgba(0, 2, 6, 0.25);
+  box-shadow: 0 1px 4px 0 rgba(0, 2, 6, 0.25);
+}
+.hilo-deck-card__back {
+  background: white url(/images/game/hilo/card-back.png?v=89a817c44589e30fa5ebb7370ea8b2dd) no-repeat center;
+}
+.hilo-deck-card__front {
+  /* -webkit-transform: rotateY(180deg);
+                  transform: rotateY(180deg);*/
+}
+.hilo-bet-controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  height: 365px;
+}
+
+.hilo-bet-control-item {
+  position: relative;
+  color: white;
+  height: 60px;
+  width: 100%;
+  border: none;
+  border-radius: 3px;
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: normal;
+  text-align: justify;
+  cursor: pointer;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  background-image: -webkit-gradient(linear, left top, right top, from(#1f9a19), to(#28c020));
+  background-image: linear-gradient(to right, #1f9a19, #28c020);
+}
+.hilo-bet-control-item:hover {
+  background-image: -webkit-gradient(linear, left top, right top, from(#28c020), to(#28c020));
+  background-image: linear-gradient(to right, #28c020, #28c020);
+}
+.hilo-bet-control-item:disabled,
+.hilo-bet-control-item_darken {
+  opacity: 0.5;
+  cursor: default;
+}
+.hilo-bet-control-item:focus {
+  outline: 0;
+}
+.hilo-bet-control-item__title,
+.hilo-bet-control-item__factor,
+.hilo-bet-control-item__probability,
+.hilo-bet-control-item__count,
+.hilo-bet-control-item__amount {
+  position: absolute;
+}
+.hilo-bet-control-item__title {
+  text-transform: uppercase;
+  top: 0.5rem;
+  left: 0.5rem;
+}
+.hilo-bet-control-item__title_hi,
+.hilo-bet-control-item__title_lo {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  color: white;
+  background: rgba(1, 1, 1, 0.2);
+  height: 5rem;
+  width: 8rem;
+  font-size: 28px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.hilo-bet-control-item__title_hi {
+  padding-top: 1.5rem;
+  -webkit-clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.hilo-bet-control-item__title_lo {
+  -webkit-clip-path: polygon(0 0, 50% 100%, 100% 0);
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+}
+.hilo-bet-control-item__factor {
+  font-size: 13px;
+  bottom: 0.5rem;
+  left: 0.5rem;
+}
+.hilo-bet-control-item__factor_lo,
+.hilo-bet-control-item__factor_hi {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.hilo-bet-control-item__count {
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 14px;
+  font-weight: normal;
+}
+.hilo-bet-control-item__count:before {
+  font-family: 'Hilo Icons', 'PT Sans', sans-serif;
+  content: '\1F465';
+  position: absolute;
+  right: 128%;
+  font-size: 15px;
+  top: -1px;
+}
+.hilo-bet-control-item__count_lo,
+.hilo-bet-control-item__count_hi {
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.hilo-bet-control-item__amount {
+  font-size: 13px;
+  bottom: 0.5rem;
+  right: 0.5rem;
+}
+.hilo-bet-control-item__factor_lo,
+.hilo-bet-control-item__factor_hi,
+.hilo-bet-control-item__probability_lo,
+.hilo-bet-control-item__probability_hi {
+  font-size: 16px;
+  font-weight: bold;
+  position: absolute;
+}
+.hilo-bet-control-item__probability {
+  left: 0.5rem;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.hilo-bet-control-item_red {
+  background-image: -webkit-gradient(linear, left top, right top, from(#f92030), to(#fd0053));
+  background-image: linear-gradient(to right, #f92030, #fd0053);
+}
+.hilo-bet-control-item_red:hover {
+  background-image: -webkit-gradient(linear, left top, right top, from(#fd0053), to(#fd0053));
+  background-image: linear-gradient(to right, #fd0053, #fd0053);
+}
+.hilo-bet-control-item_black {
+  background-image: -webkit-gradient(linear, left top, right top, from(#000000), to(#313131));
+  background-image: linear-gradient(to right, #000000, #313131);
+}
+.hilo-bet-control-item_black:hover {
+  background-image: -webkit-gradient(linear, left top, right top, from(#313131), to(#313131));
+  background-image: linear-gradient(to right, #313131, #313131);
+}
+.hilo-bet-control-item_joker {
+  background-image: -webkit-gradient(linear, left top, right top, from(#0062f4), to(#009ddd));
+  background-image: linear-gradient(to right, #0062f4, #009ddd);
+}
+.hilo-bet-control-item_joker:hover {
+  background-image: -webkit-gradient(linear, left top, right top, from(#009ddd), to(#009ddd));
+  background-image: linear-gradient(to right, #009ddd, #009ddd);
+}
+.hilo-bet-control-item_hi,
+.hilo-bet-control-item_lo {
+  height: 110px;
+  background: no-repeat center center;
+}
+.hilo-bet-control-item_hi {
+  color: #182328;
+  background-image: -webkit-gradient(linear, left top, right top, from(#e3d132), to(#fda700));
+  background-image: linear-gradient(to right, #e3d132, #fda700);
+}
+.hilo-bet-control-item_hi:hover {
+  background-image: -webkit-gradient(linear, left top, right top, from(#fda700), to(#fda700));
+  background-image: linear-gradient(to right, #fda700, #fda700);
+}
+.hilo-bet-control-item_lo {
+  background-image: -webkit-gradient(linear, left top, right top, from(#a100f4), to(#0032b2));
+  background-image: linear-gradient(to right, #a100f4, #0032b2);
+}
+.hilo-bet-control-item_lo:hover {
+  background-image: -webkit-gradient(linear, left top, right top, from(#0032b2), to(#0032b2));
+  background-image: linear-gradient(to right, #0032b2, #0032b2);
+}
+.hilo-history-feed {
+  overflow: hidden;
+  padding-bottom: 1rem;
+  opacity: 0.5;
+}
+.hilo-history-feed__collection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.hilo-history-feed__card {
+  margin-right: 18px;
+}
+.hilo-history-feed__card_zero-width {
+  width: 0;
+  margin: 0;
+  opacity: 0;
+}
+.hilo-history-feed__card_zero-width .hilo-history-feed__comparison-sign-wrapper {
+  opacity: 0;
+}
+.hilo-history-feed__comparison-sign-wrapper {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  -webkit-transition: opacity 0.7s;
+  transition: opacity 0.7s;
+}
+.hilo-history-feed__comparison-sign {
+  display: block;
+}
+.hilo-history-feed__comparison-sign_lo {
+  -webkit-transform: rotateZ(180deg);
+  transform: rotateZ(180deg);
+}
+.hilo-statistics__title {
+  font-size: 18px;
+}
+
+.hilo-statistics__card-label {
+  font-size: 18px;
+  font-weight: bold;
+  color: #6c757d;
+  text-align: center;
+  width: 45px;
+}
+
+.hilo-statistics__bar {
+  margin-bottom: 15px;
+}
+
+.hilo-statistics__cards {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.hilo-statistics__change-button {
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+  cursor: pointer;
+  color: #cccccc;
+}
+.hilo-statistics__change-button:hover {
+  color: #cccccc;
+}
+
+.hilo-statistics__change-icon {
+  width: 24px;
+  height: 24px;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.hilo-statistics__card-frequency-progress {
+  background-color: #000000;
+  opacity: 0.3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  -webkit-transition: height 0.3s;
+  transition: height 0.3s;
+}
+
+.hilo-statistics-colors-ratio {
+  color: #fff;
+  border-radius: 0.25rem;
+  height: 2rem;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 14px;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  margin: 0 1rem;
+}
+.hilo-statistics-colors-ratio__red,
+.hilo-statistics-colors-ratio__black {
+  height: 100%;
+  text-align: center;
+  -webkit-transition: width 0.3s;
+  transition: width 0.3s;
+}
+.hilo-statistics-colors-ratio__red {
+  background-image: -webkit-gradient(linear, left top, right top, from(#f91e32), color-stop(59%, #fd0351));
+  background-image: linear-gradient(to right, #f91e32, #fd0351 59%);
+}
+.hilo-statistics-colors-ratio__black {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(59%, #040404), to(#1b1b1b));
+  background-image: linear-gradient(to right, #040404 59%, #1b1b1b);
+}
+.hilo-bets thead {
+  border-bottom: 1px solid #000;
+}
+
+.hilo-bets__row th {
+  padding: 22px 0;
+}
+
+.hilo-bets__row td {
+  padding: 10px 0;
+}
+
+.hilo-bets__row td:first-child,
+.hilo-bets__row th:first-child {
+  padding-left: 24px;
+  width: 45%;
+  color: #ccc;
+}
+.hilo-bets__row td:not(:first-child),
+.hilo-bets__row th:not(:first-child) {
+  width: 20%;
+  color: #ccc;
+}
+
+.hilo-bets__row td:not(:first-child) {
+  color: #17bae0;
+}
+
+.hilo-bets__row_win td {
+  color: #10e433 !important;
+}
+
+.hilo-bets__row_loose {
+  /* background-color: #182d34;  */
+}
+.hilo-bets__row_loose td {
+  color: #ff0003 !important;
+}
+
+.hilo-bets__avatar {
+  margin-right: 12px;
+  width: 20px;
+  height: 20px;
+}
+.refill-grid {
+  width: 100%;
+}
+
+.game {
+  position: relative;
+}
+.game .game-leaders-bonus-region {
+  margin-bottom: 20px;
+}
+
+.game-tab,
+.history-top,
+.navigation-tab {
+  background-color: #213138;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  height: 51px;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+.game-tab_bordered,
+.history-top_bordered,
+.navigation-tab_bordered {
+  border-bottom: 1px solid black;
+}
+.game-tab .right-header,
+.history-top .right-header,
+.navigation-tab .right-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.game-tab .right-header .right-header-item,
+.history-top .right-header .right-header-item,
+.navigation-tab .right-header .right-header-item {
+  padding: 0 14px;
+  border-left: 1px solid #040f22;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 14px;
+}
+.game-tab .right-header .right-header-item:last-child,
+.history-top .right-header .right-header-item:last-child,
+.navigation-tab .right-header .right-header-item:last-child {
+  border-top-right-radius: 4px;
+}
+.game-tab .right-header .link,
+.history-top .right-header .link,
+.navigation-tab .right-header .link {
+  color: #217487;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.game-tab .right-header .link svg,
+.history-top .right-header .link svg,
+.navigation-tab .right-header .link svg {
+  height: 26px;
+  margin-right: 12px;
+  fill: #217487;
+}
+
+.classic-game-room * {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.game-tab.classic .right-header .game-type-selector-tab,
+.history-top.classic .right-header .game-type-selector-tab {
+  cursor: pointer;
+  background-color: #212f35;
+  padding: 0 18px;
+}
+.game-tab.classic .right-header .game-type-selector-tab.active,
+.history-top.classic .right-header .game-type-selector-tab.active {
+  background-color: #182129;
+}
+.game-tab.classic .right-header .game-type-selector-tab.active .game-type-selector.list,
+.history-top.classic .right-header .game-type-selector-tab.active .game-type-selector.list {
+  background-position: -30px -5px;
+}
+.game-tab.classic .right-header .game-type-selector-tab.active .game-type-selector.grid,
+.history-top.classic .right-header .game-type-selector-tab.active .game-type-selector.grid {
+  background-position: -30px -30px;
+}
+.game-tab.classic .right-header .game-type-selector-tab .game-type-selector,
+.history-top.classic .right-header .game-type-selector-tab .game-type-selector {
+  background-image: url(/src/img/sprites/game-view-selector-sprites.png?v=66c6c6ace0676af19cd30d5e9dbc2360);
+  background-repeat: no-repeat;
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+.game-tab.classic .right-header .game-type-selector-tab .game-type-selector.list,
+.history-top.classic .right-header .game-type-selector-tab .game-type-selector.list {
+  background-position: -5px -5px;
+}
+.game-tab.classic .right-header .game-type-selector-tab .game-type-selector.grid,
+.history-top.classic .right-header .game-type-selector-tab .game-type-selector.grid {
+  background-position: -5px -30px;
+}
+
+.rv-input-number .input-number-actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 0.6rem;
+  font-size: 14px;
+}
+.rv-input-number .input-number-actions__item {
+  margin-right: 0.6rem;
+  cursor: pointer;
+  color: #9ea7b3;
+  list-style: none;
+}
+
+.rv-input-number .input-number-limits {
+  text-align: right;
+  font-size: 12px;
+  color: #808080;
+  margin: 10px 0;
+}
+
+.rv-input-number .btn {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  min-width: 34px;
+}
+
+.rv-input-number .form-control {
+  border-color: var(--light);
+}
+.rv-input-number .form-control:invalid {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.input-group > .input-group-prepend > .btn,
+.input-group > .input-group-prepend > .input-group-text,
+.input-group > .input-group-append:not(:last-child) > .btn,
+.input-group > .input-group-append:not(:last-child) > .input-group-text,
+.input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.btn-light {
+  color: #212529;
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+}
+
+.input-number-no-arrows {
+  border: none;
+}
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  border-radius: 0.25rem;
+  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+.lg-pdr-3 {
+  padding-right: 3px;
+}
+.lg-pdl-3 {
+  padding-left: 3px;
+}
+
+/* */
+@media only screen and (min-width: 1200px) {
+  /* .lg-pdr-3 { padding-right: 3px; }
+  .lg-pdl-3 { padding-left: 3px; } */
+}
+
+@media only screen and (max-width: 1200px) {
+  #lottery-we-chat {
+    display: block;
+    top: 20%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .hilo-game__main-region {
+    flex-direction: column;
+  }
+  .hilo-game__deck-region {
+    order: 1;
+  }
+  .hilo-game__high-low-bet-region {
+    order: 2;
+    margin: 70px 0 10px;
+  }
+  .hilo-game__next-bet-region {
+    order: 3;
+  }
+
+  .hilo-card_sm {
+    width: 30px;
+    height: 50px;
+    font-size: 30px;
+  }
+  .hilo-statistics__card-label {
+    font-size: 16px;
+    width: 30px;
+  }
+  #popup-check-hash .modal-content {
+    margin-top: 65px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .hilo-statistics {
+    display: none;
+  }
+}
+
+.hilo-deck-card__countdown {
+  width: 102px;
+  height: 102px;
+  border: 2px solid red;
+  border-radius: 50%;
+  line-height: 86px;
+  font-size: 62px;
+}
+.hilo-deck-card__countdown__black {
+  border: 2px solid black;
+}
+.hilo-deck-card__countdown__red {
+  border: 2px solid red;
+}
+.hilo-deck-card__countdown__joker {
+  border: 2px solid #ffffff;
+}
+
+.not-auth-placeholder .not-auth-placeholder-container {
+  top: 50%;
+}
+.hilo-module .hilo-game .d-flex {
+  display: flex !important;
+}
+
+.align-items-center {
+  -webkit-box-align: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+}
+
+.justify-content-between {
+  -webkit-box-pack: justify !important;
+  -ms-flex-pack: justify !important;
+  justify-content: space-between !important;
+}
+
+.move {
+  animation: field10;
+  animation-duration: 0.75s;
+  animation-fill-mode: forwards;
+  /* animation-timing-function: ease-in; */
+  animation-timing-function: linear;
+  /* transform-origin: top left; */
+  /*   top: 0 !important; */
+  /*   right: 0 !important;
+
+top: 40.0044px; left: 119.213px; transform: scale(0.520035);
+
+*/
+}
+
+@keyframes lol {
+  to {
+    transform: scale(0.2);
+    top: 0%;
+    left: 15px;
+  }
+}
+
+@keyframes field10 {
+  from {
+    left: calc(50% - 103px);
+  }
+  to {
+    transform: scale(0.2);
+    left: 15px;
+    top: 30px;
+  }
+}
+
+@keyframes animateThis {
+  0% {
+    width: 0;
+    margin: 0;
+  }
+  100% {
+    width: 41px;
+    margin-right: 18px;
+  }
+}
+#hilo-history-feed__collection .hilo-history-feed__card_zero-width {
+  -webkit-animation: animateThis 1s ease-in;
+  -webkit-transition: margin-right 1s; /* Safari */
+  transition: margin-right 1s;
+}
+
+.flipper,
+.hilo-deck-card__flipper {
+  transform-style: preserve-3d;
+  transform-origin: center right;
+  transition: transform 2s;
+  position: relative;
+  /* transform: rotateY(0deg) scale(1); */
+}
+
+.flipper.is-flipped,
+.hilo-deck-card__flipper.is-flipped {
+  transform: translateX(-100%) rotateY(-180deg);
+}
+.hilo-deck-card__flipper .hilo-deck-card__front {
+  position: absolute;
+}
+.hilo-deck-card__flipper.is-flipped .hilo-deck-card__front {
+  position: absolute;
+  transform: rotateY(180deg);
+}
+
+.hilo-deck-card__flipper .hilo-deck-card__back {
+  transform: rotateY(180deg);
+  position: absolute;
+}
+
+.hilo-bet-control-item.disabled,
+.hilo-bet-control-item_darken {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+small,
+.small {
+  font-size: 80%;
+  font-weight: 400;
+}
+.d-flex {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+.hilo-history-feed__card {
+  cursor: pointer;
+}
+
+/* CSS for form bet (get from lottery.css) */
+.bonus-game-calc {
+  padding: 15px 10px 12px 10px;
+  border-radius: 0px;
+  background-color: #292929;
+  /* margin: 15px 0; */
+}
+
+.bonus-game-bet-input-container {
+  margin: 10px 0 12px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 2px;
+  background-color: #fff;
+  height: 40px;
+}
+
+.bonus-game-bet-input-container.error {
+  outline: 2px solid #f00;
+}
+
+.bonus-game-bet-input-container .bonus-game-bet-input {
+  height: 40px;
+  padding: 0 3px;
+  font-size: 18px;
+  line-height: 40px;
+  width: 100%;
+  outline: none;
+  border: none;
+}
+
+.bets-limits {
+  font-size: 12px;
+  color: #d7d7d7;
+}
+
+.bets-limits img {
+  width: 14px;
+}
+
+.bets-limits .coins-component {
+  color: #d7d7d7;
+  font-size: 14px;
+  vertical-align: baseline;
+}
+
+.bonus-game-calc-place-bet-buttons .place-bet-buttons-text {
+  padding-left: 2px;
+}
+
+.bonus-game-calc-place-bet-buttons .place-bet-buttons-list {
+  margin-top: 6px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.bonus-game-calc-place-bet-buttons .place-bet-buttons-list .bonus-game-calc-place-bet {
+  width: 126px;
+  height: 40px;
+  display: inline-block;
+  line-height: 40px;
+  padding-left: 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.bonus-game-calc-place-bet-buttons .place-bet-buttons-list .bonus-game-calc-place-bet .coins-component {
+  color: #fff;
+}
+
+.bonus-game-calc-place-bet-buttons .place-bet-buttons-list .bonus-game-calc-place-bet.disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.bonus-game-calc-place-bet-buttons .place-bet-buttons-list .bonus-game-calc-place-bet.bonus-black-button {
+  background-position: -5px -36px;
+}
+
+.bonus-game-calc-place-bet-buttons
+  .place-bet-buttons-list
+  .bonus-game-calc-place-bet.bonus-black-button:hover:not(.disabled) {
+  background-position: -5px -86px;
+}
+
+.bonus-game-calc-place-bet-buttons .place-bet-buttons-list .bonus-game-calc-place-bet.bonus-red-button {
+  background-position: -5px -136px;
+}
+
+.bonus-game-calc-place-bet-buttons
+  .place-bet-buttons-list
+  .bonus-game-calc-place-bet.bonus-red-button:hover:not(.disabled) {
+  background-position: -204px -5px;
+}
+
+.bonus-game-calc-place-bet-buttons .place-bet-buttons-list .bonus-game-calc-place-bet.bonus-zero-button {
+  width: 126px;
+  background-position: -204px -55px;
+}
+
+.bonus-game-calc-place-bet-buttons
+  .place-bet-buttons-list
+  .bonus-game-calc-place-bet.bonus-zero-button:hover:not(.disabled) {
+  background-position: -142px -105px;
+}
+
+.bet-calculator {
+  display: block;
+}
+
+.bet-calculator.disabled .buttons-list .button {
+  pointer-events: none;
+  color: #182328;
+  cursor: default;
+}
+
+.bet-calculator.disabled .buttons-list .button .sprite.clear {
+  background-position: -112px -5px;
+}
+
+.bet-calculator .buttons-list {
+  display: -webkit-box;
+  display: flex;
+  padding-left: 0;
+}
+
+.bet-calculator .buttons-list .button {
+  display: inline-block;
+  margin-right: 1px;
+  /*font-weight: 700;*/
+  text-align: center;
+  font-size: 16px;
+  line-height: 34px;
+  color: #353534;
+  min-height: 34px;
+  min-width: 10.9%;
+  vertical-align: top;
+  background: #224a5b;
+  background: linear-gradient(to bottom, #ffbb60 0, #f97b13 90%);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-weight: bold;
+  min-width: 28px;
+}
+
+.bet-calculator .buttons-list .button:hover {
+  color: #fff;
+  cursor: pointer;
+}
+.bet-calculator .buttons-list .button.repeat-bet {
+  width: 35px;
+}
+
+.bet-calculator .buttons-list .button.plus10 {
+  padding: 0 3px 0 0;
+  width: 39px;
+}
+
+.bet-calculator .buttons-list .button.plus100 {
+  padding: 0 2px 0 0;
+  width: 49px;
+}
+
+.bet-calculator .buttons-list .button.plus1000 {
+  width: 44px;
+}
+
+.bet-calculator .buttons-list .button.plus10000 {
+  width: 52px;
+}
+
+.bet-calculator .buttons-list .button.multiply {
+  width: 39px;
+}
+
+.bet-calculator .buttons-list .button.divide {
+  width: 41px;
+}
+
+.bet-calculator .buttons-list .button.all {
+  width: 47px;
+}
+
+.bet-calculator .buttons-list .button .sprite {
+  background: url(../images/icon/bonus-room-sprites-v2.png) no-repeat;
+  display: block;
+}
+
+.bet-calculator .buttons-list .button .sprite.repeat-bet {
+  width: 20px;
+  height: 18px;
+  background-position: -34px -4px;
+  margin: 6px 0 0 16px;
+}
+
+.bet-calculator .buttons-list .button .sprite.repeat-bet:hover {
+  background-position: -4px -4px;
+}
+
+.bet-calculator .buttons-list .button .sprite.clear {
+  width: 14px;
+  height: 16px;
+  background-position: -88px -5px;
+  margin: 8px auto;
+}
+
+.bet-calculator .buttons-list .button .sprite.clear:hover {
+  background-position: -64px -5px;
+}
+
+.hilo-game__history-feed-region {
+  margin-bottom: 20px;
+}
+
+.hilo-game__bets-region .hilo-bets table {
+  width: 100%;
+}
+
+.hilo-game__hash-region {
+  margin-bottom: 15px;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#table-list-user-bet tr td,
+#table-list-user-bet tr td a {
+  color: #f99910;
+  opacity: 0.7;
+}
+
+#table-list-user-bet tr td:first-child,
+#table-list-user-bet tr td:first-child > a {
+  color: #fff;
+  opacity: 1;
+  text-decoration: none;
+}
+
+.volume {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.hilo-history-feed__comparison-sign {
+  width: 40px;
+  height: 40px;
+}
+.hilo-history-feed__comparison-sign_hi {
+  background: url('/images/game/hilo/hilo-card-arrow.png') no-repeat;
+}
+.hilo-history-feed__comparison-sign_lo {
+  background: url('/images/game/hilo/hilo-card-arrow.png') no-repeat;
+  transform: rotateZ(180deg);
+}
+.hilo-history-feed__comparison-sign_eq {
+  background: url('/images/game/hilo/hilo-card-eq.png') no-repeat;
+}
+
+/* Report user css */
+#report-modals-region .dialog-modal-content {
+  width: 500px;
+}
+#report-modals-region .ui-dialog1 .ui-dialog-title {
+  width: 100%;
+}
+#report-modals-region .ui-dialog1 .ui-dialog-titlebar {
+  text-align: center;
+}
+#reporting-user-name {
+  width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  z-index: 2;
+  max-width: 200px;
+}
+#report-modals-region .dialogText {
+  text-align: left;
+  padding-bottom: 0;
+}
+#report-modals-region .reasonText {
+  color: #b5babb;
+  font-size: 15px;
+  padding-top: 15px;
+  /* padding-left: 15px; */
+}
+.report-reason-select {
+  display: inline-block;
+  color: #fff;
+  background-color: #727070;
+  width: 130px;
+  height: 25px;
+}
+.report-other-reason-textarea {
+  padding-top: 5px;
+  color: #fff;
+  background-color: #727070;
+  font-size: 15px;
+}
+
+@media screen and (max-width: 500px) {
+  #report-modals-region .dialog-modal-content {
+    width: 100%;
+  }
+  .report-other-reason-textarea {
+    width: 100%;
+  }
+}
+
+/* Diamond */
+.user-tab-coin {
+  width: 250px;
+  background-color: unset !important;
+  margin: 15px 0;
+}
