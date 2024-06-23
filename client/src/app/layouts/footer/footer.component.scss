@@ -1,0 +1,73 @@
+#wrapper-footer {
+  max-width: 1366px;
+  margin: 0 auto;
+}
+
+footer {
+  overflow: hidden;
+  background: #242020 url('/assets/images/footer.jpg') no-repeat center;
+  background-size: cover;
+  height: 100%;
+  #footer {
+    padding: 15px 0;
+    margin-top: 30px;
+  }
+}
+
+.footer-logo {
+  display: block;
+  img {
+    width: 100%;
+    max-width: 210px;
+  }
+}
+
+@media screen and (max-width:1366px) {
+  #wrapper-footer {
+    max-width: 1170px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width:992px) {
+  #wrapper-footer {
+    max-width: 970px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width:900px) {
+  #wrapper-footer {
+    >div {
+      width: 100%;
+    }
+    .footer-logo {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  .players_online {
+    max-width: 210px;
+    margin: 0 auto;
+  }
+  footer {
+    background-image: url(/assets/images/footer.jpg);
+    #footer {
+      padding-top: 30px;
+      margin-top: 0;
+    }
+  }
+}
+
+@media screen and (max-width:568px) {
+  #wrapper-footer {
+    max-width: 550px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #footer {
+    text-align: center;
+  }
+}

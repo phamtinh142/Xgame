@@ -1,0 +1,25 @@
+<div>
+    <layout-header></layout-header>
+
+    <div class="clearfix"></div>
+
+    <div id="main">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-padding" id="main-left">
+            <router-outlet></router-outlet>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 no-padding" id="main-right">
+            <layout-profile-right></layout-profile-right>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <layout-footer></layout-footer>
+
+    <div class="players_online2 hidden hidden-xs hidden-sm">
+        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+        <span class="player_count2 num_player_online">0</span>
+        <span class="player_on_txt2">players online</span>
+    </div>
+</div>
