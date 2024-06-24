@@ -1,9 +1,11 @@
 import { Controller, Post, Res, Req, Body, UseGuards, HttpStatus, Get } from '@nestjs/common';
 import { Response, Request } from 'express';
-import { AuthGuard } from '@nestjs/passport';
 import { BaseResponse } from '@common/dto/base.response';
 import { AuthService } from '@services/auth.service';
 import { SigninDto } from '@dto/auth.dto';
+import { UserInfo } from '@common/dto/user.dto';
+import { LocalAuthGuard } from '@common/guards/local.guard';
+import { JwtAuthGuard } from '@common/guards/jwt.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -20,16 +22,17 @@ export class AuthController {
     });
   }
 
-  @UseGuards(AuthGuard('local'))
+  @UseGuards(LocalAuthGuard)
   @Post('login')
-  login(@Req() req: Request) {
-    req.session['user'] = req.user;
+  async login(@Req() req: Request) {
+    const token = await this._authService.login(req.user as UserInfo);
+
     return new BaseResponse({
       statusCode: HttpStatus.OK,
       status: true,
       message: 'Login successfully',
       data: {
-        redirect: '/',
+        access_token: token,
       },
     });
   }
@@ -41,6 +44,16 @@ export class AuthController {
         res.clearCookie('connect.sid');
         return res.redirect('/');
       });
+    });
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('test')
+  test() {
+    return new BaseResponse({
+      statusCode: HttpStatus.OK,
+      status: true,
+      message: 'Ok',
     });
   }
 }

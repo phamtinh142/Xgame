@@ -1,15 +1,17 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { UserRepositotyInjectName } from '@providers/database/inject-name.constant';
 import { compare, genSalt, hash } from 'bcrypt';
-import { UserInfo } from '@common/dto/user.dto';
+import { PayloadToken, UserInfo } from '@common/dto/user.dto';
 import { UserRepository } from '@schemas/repositories';
 import { LoginDto, SigninDto } from '@dto/auth.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
     @Inject(UserRepositotyInjectName)
     private readonly _userRepository: UserRepository,
+    private jwtService: JwtService,
   ) {}
 
   async validateUser(data: LoginDto): Promise<UserInfo> {
@@ -25,7 +27,7 @@ export class AuthService {
       return {
         _id: user._id,
         email: user.email,
-        userName: user.username,
+        username: user.username,
         status: user.status,
         permission: user.permission,
         avatar: user.avatar,
@@ -35,6 +37,11 @@ export class AuthService {
     }
 
     return null;
+  }
+
+  async login(user: UserInfo): Promise<string> {
+    const payload: PayloadToken = { username: user.username, sub: user._id };
+    return this.jwtService.sign(payload);
   }
 
   async createUser(data: SigninDto): Promise<any> {
@@ -53,7 +60,7 @@ export class AuthService {
     const hashPassword = await this.hashPassword(data.password);
 
     return await this._userRepository.create({
-      userName: data.username,
+      username: data.username,
       email: data.email,
       password: hashPassword,
     });

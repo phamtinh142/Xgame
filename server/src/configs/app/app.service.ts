@@ -16,4 +16,12 @@ export class AppConfigService {
   get baseUrl(): string {
     return this._commonConfigService.getString('BASE_URL', 'http://localhost:3020');
   }
+
+  get tokenSecretKey(): string {
+    return this._commonConfigService.getString('TOKEN_SECRET_KEY', '5sy08TyJCn');
+  }
+
+  get tokenExpires(): string {
+    return this._commonConfigService.getString('TOKEN_EXPIRES', '10h');
+  }
 }

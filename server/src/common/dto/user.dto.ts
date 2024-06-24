@@ -4,7 +4,7 @@ import { PickType } from '@nestjs/swagger';
 export class UserDto {
   _id: string;
   email: string;
-  userName: string;
+  username: string;
   password: string;
   status: number;
   tokens: TokenType[];
@@ -18,10 +18,17 @@ export class UserDto {
 export class UserInfo extends PickType(UserDto, [
   '_id',
   'email',
-  'userName',
+  'username',
   'status',
   'permission',
   'avatar',
   'coin',
   'level',
 ] as const) {}
+
+export class PayloadToken {
+  username: string;
+  sub: string;
+  iat?: number;
+  exp?: number;
+}
