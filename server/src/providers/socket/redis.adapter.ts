@@ -31,12 +31,7 @@ export class RedisAdapter extends IoAdapter {
   }
 
   createIOServer(port: number, options?: ServerOptions): any {
-    const socketOption = {
-      ...options,
-      path: '/egame',
-    } as ServerOptions;
-
-    const server = super.createIOServer(port, socketOption);
+    const server = super.createIOServer(port, options);
     server.adapter(this._adapterConstructor);
     return server;
   }

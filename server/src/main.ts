@@ -7,12 +7,12 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { TransformInterceptor } from '@common/interceptors/transform.interceptor';
 import { AllExceptionsFilter } from '@common/filter/exceptions.filter';
 import { AppService } from './app.service';
-import { RedisAdapter } from '@providers/socket/adapter/redis.adapter';
 import { RedisConfigService } from '@configs/redis/redis.service';
 import { AppConfigService } from '@configs/app/app.service';
 import * as session from 'express-session';
 import * as passport from 'passport';
 import * as cookieParser from 'cookie-parser';
+import { RedisAdapter } from '@providers/socket/redis.adapter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);

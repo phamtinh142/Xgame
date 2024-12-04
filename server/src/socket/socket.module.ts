@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { SocketService } from './socket.service';
+import { GameX2Socket } from '@socket/game-x2.socket';
 
 @Module({
-  providers: [SocketService],
+  providers: [GameX2Socket],
 })
 export class SocketModule {}
