@@ -1,16 +1,16 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { GameDoubleRepositotyInjectName } from '@providers/database/inject-name.constant';
 import { GameDoubleRepositoryInterface } from '@schemas/repositories';
-import { ColorGameDoubleEnum, GameStatusEnum } from '@common/constants';
+import { GameStatusEnum } from '@common/constants';
 import { Subject } from 'rxjs';
-import { createNewRotateGameDouble, createRandomGameDouble } from '@common/help/game-double.help';
+import { createColorWinGameDouble, createNewRotateGameDouble, createRandomGameDouble } from '@common/help';
 
 const COUNT_DOWN = 25;
 
 @Injectable()
 export class GameDoubleService {
-  private newGameDouble = new Subject<{ name: string; data: unknown }>();
-  onNewGameDouble = this.newGameDouble.asObservable();
+  private gameDoubleSubject = new Subject<{ name: string; data: unknown }>();
+  onGameDoubleSubject = this.gameDoubleSubject.asObservable();
 
   constructor(
     @Inject(GameDoubleRepositotyInjectName)
@@ -18,8 +18,6 @@ export class GameDoubleService {
   ) {}
 
   async startGame() {
-    console.log('startGame lottery');
-
     const lastGameBetting = await this._gameDoubleRepository.getLastGameInfo(GameStatusEnum.BETTING);
 
     if (lastGameBetting) {
@@ -30,27 +28,9 @@ export class GameDoubleService {
 
   async createGame() {
     const { roundNumberWin, roundNumber, hashSalt, roundHash } = createRandomGameDouble();
-
-    console.log('roundNumberWin: ', roundNumberWin);
-
-    let colorWin: number;
-    let gameID = 1000;
-    let old_rotate = 9999;
-
-    if (roundNumberWin === 0) {
-      colorWin = ColorGameDoubleEnum.GREEN;
-    } else if (roundNumberWin <= 7) {
-      colorWin = ColorGameDoubleEnum.BLACK;
-    } else {
-      colorWin = ColorGameDoubleEnum.RED;
-    }
-
     const lastGameDone = await this._gameDoubleRepository.getLastGameInfo(GameStatusEnum.DONE);
-
-    if (lastGameDone) {
-      gameID = lastGameDone.game_id + 1;
-      old_rotate = lastGameDone.rotate;
-    }
+    const gameID = lastGameDone ? lastGameDone.game_id + 1 : 1000;
+    const oldRotate = lastGameDone ? lastGameDone.rotate : 9999;
 
     let randomRotate = roundNumber * 10;
 
@@ -58,7 +38,8 @@ export class GameDoubleService {
       randomRotate = 360 - randomRotate;
     }
 
-    const new_rotate = createNewRotateGameDouble(roundNumberWin, randomRotate);
+    const newRotate = createNewRotateGameDouble(roundNumberWin, randomRotate);
+    const colorWin = createColorWinGameDouble(roundNumberWin);
 
     const newGame = await this._gameDoubleRepository.createGame({
       game_id: gameID,
@@ -67,13 +48,22 @@ export class GameDoubleService {
       color_win: colorWin,
       hash_salt: hashSalt,
       round_hash: roundHash,
-      rotate: parseFloat(new_rotate.toFixed(2)),
+      rotate: parseFloat(newRotate.toFixed(2)),
       status: GameStatusEnum.BETTING,
       timestamp: Date.now() * (COUNT_DOWN * 1000),
       coin: 0,
       coin_profit: 0,
     });
 
-    this.newGameDouble.next({ name: 'new_game_double', data: {} });
+    this.gameDoubleSubject.next({
+      name: 'returnNewGame',
+      data: {
+        _id: newGame._id,
+        gameID: newGame.game_id,
+        roundHash: roundHash,
+        oldRotate: oldRotate,
+        remain_time: COUNT_DOWN,
+      },
+    });
   }
 }

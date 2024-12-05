@@ -1,5 +1,6 @@
 import * as seedrandom from 'seedrandom';
 import { createHash, randomBytes } from 'crypto';
+import { ColorGameDoubleEnum } from '@common/constants';
 const rng = seedrandom('KKLfJWRoUAAAAANsQga3wTizgUfUe1NrWH4xbxmc1', { entropy: true });
 
 export interface RandomGameDouble {
@@ -71,5 +72,15 @@ export function createNewRotateGameDouble(roundNumberWin: number, randomRotate: 
       return randomRotate + 24;
     case 14:
       return randomRotate + 24 * 3;
+  }
+}
+
+export function createColorWinGameDouble(roundNumberWin: number): number {
+  if (roundNumberWin === 0) {
+    return ColorGameDoubleEnum.GREEN;
+  } else if (roundNumberWin <= 7) {
+    return ColorGameDoubleEnum.BLACK;
+  } else {
+    return ColorGameDoubleEnum.RED;
   }
 }

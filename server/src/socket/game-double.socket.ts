@@ -22,9 +22,7 @@ export class GameDoubleSocket
   constructor(private readonly _gameDoubleService: GameDoubleService) {}
 
   afterInit() {
-    this._gameDoubleService.onNewGameDouble.subscribe((data) => {
-      this.server.emit(data.name, data.data);
-    });
+    this._gameDoubleService.onGameDoubleSubject.subscribe(({ name, data }) => this.server.emit(name, data));
   }
 
   async handleConnection(client: Socket) {

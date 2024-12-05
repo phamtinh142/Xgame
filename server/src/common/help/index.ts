@@ -1,1 +1,1 @@
-export * from './random.help';
+export * from './game-double.help';
