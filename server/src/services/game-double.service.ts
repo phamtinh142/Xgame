@@ -1,6 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { GameDoubleRepositotyInjectName } from '@providers/database/inject-name.constant';
-import { GameDoubleRepositoryInterface } from '@schemas/repositories';
+import {
+  BetGameDoubleRepositotyInjectName,
+  GameDoubleRepositotyInjectName,
+} from '@providers/database/inject-name.constant';
+import { BetGameDoubleRepositoryInterface, GameDoubleRepositoryInterface } from '@schemas/repositories';
 import { GameStatusEnum } from '@common/constants';
 import { Subject } from 'rxjs';
 import { createColorWinGameDouble, createNewRotateGameDouble, createRandomGameDouble } from '@common/help';
@@ -15,6 +18,8 @@ export class GameDoubleService {
   constructor(
     @Inject(GameDoubleRepositotyInjectName)
     private readonly _gameDoubleRepository: GameDoubleRepositoryInterface,
+    @Inject(BetGameDoubleRepositotyInjectName)
+    private readonly _betGameDoubleRepository: BetGameDoubleRepositoryInterface,
   ) {}
 
   async startGame() {
@@ -66,4 +71,28 @@ export class GameDoubleService {
       },
     });
   }
+
+  async repeatGame() {
+    const lastGameBetting = await this._gameDoubleRepository.getLastGameInfo(GameStatusEnum.BETTING);
+
+    if (!lastGameBetting) {
+      this.createGame().then();
+      return;
+    }
+
+    if (lastGameBetting.timestamp >= Date.now() - 1000) {
+      setTimeout(() => this.repeatGame(), 1000);
+      return;
+    }
+  }
+  
+  async processUserBetGame(data: BetGameDouble) {
+
+  }
+}
+
+interface BetGameDouble {
+  coin: number;
+  gameID: number;
+  betType: number;
 }

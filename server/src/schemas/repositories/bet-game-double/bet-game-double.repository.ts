@@ -14,4 +14,12 @@ export class BetGameDoubleRepository
   ) {
     super(_betGameDoubleModel);
   }
+
+  async getAllUserBetGame(gameID: number): Promise<BetGameDoubleDocument[]> {
+    return this._betGameDoubleModel.aggregate([
+      {
+        $match: { game_id: gameID },
+      },
+    ]);
+  }
 }
