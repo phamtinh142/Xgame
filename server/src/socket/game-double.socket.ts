@@ -1,20 +1,31 @@
 import {
   OnGatewayConnection,
   OnGatewayDisconnect,
+  OnGatewayInit,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { Logger } from '@nestjs/common';
+import { Logger, OnApplicationShutdown } from '@nestjs/common';
 import { Server } from 'ws';
 import { Socket } from 'socket.io';
-import { JoinGameX2Dto } from '@socket/dto/join-game-x2.dto';
+import { GameDoubleService } from '@services/game-double.service';
 
 @WebSocketGateway({ cors: true, namespace: 'game-x2' })
-export class GameX2Socket implements OnGatewayConnection, OnGatewayDisconnect {
+export class GameDoubleSocket
+  implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect, OnApplicationShutdown
+{
   private logger: Logger = new Logger('MessageGateway');
 
   @WebSocketServer() server: Server;
+
+  constructor(private readonly _gameDoubleService: GameDoubleService) {}
+
+  afterInit() {
+    this._gameDoubleService.onNewGameDouble.subscribe((data) => {
+      this.server.emit(data.name, data.data);
+    });
+  }
 
   async handleConnection(client: Socket) {
     return this.logger.log(`Client connected: ${client.id}`);
@@ -25,7 +36,7 @@ export class GameX2Socket implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   @SubscribeMessage('join_x2_game')
-  public agentInitialize(client: Socket, data: JoinGameX2Dto): void {
+  public agentInitialize(client: Socket, data: any): void {
     console.log('join_x2_game: ', data);
   }
 
@@ -33,4 +44,6 @@ export class GameX2Socket implements OnGatewayConnection, OnGatewayDisconnect {
   public requestBetLottery(client: Socket, data: any) {
     console.log('request_bet_x2: ', data);
   }
+
+  onApplicationShutdown() {}
 }

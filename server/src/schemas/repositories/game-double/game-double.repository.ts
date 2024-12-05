@@ -3,6 +3,7 @@ import { GameDouble, GameDoubleDocument } from '../../game-double.schema';
 import { GameDoubleRepositoryInterface } from '@schemas/repositories';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { GameStatusEnum } from '@common/constants';
 
 export class GameDoubleRepository
   extends BaseRepositoryAbstract<GameDoubleDocument>
@@ -15,7 +16,11 @@ export class GameDoubleRepository
     super(_gameDoubleModel);
   }
 
-  getLastGame(): Promise<GameDoubleDocument> {
-    return this._gameDoubleModel.findOne().sort({ createdAt: -1 }).exec();
+  getLastGameInfo(status: GameStatusEnum): Promise<GameDoubleDocument> {
+    return this._gameDoubleModel.findOne({ status }).sort({ gameID: -1 }).exec();
+  }
+
+  createGame(game: GameDouble): Promise<GameDoubleDocument> {
+    return this._gameDoubleModel.create(game);
   }
 }

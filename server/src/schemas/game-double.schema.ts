@@ -37,10 +37,7 @@ export class GameDouble {
   coin: number;
 
   @Prop({ default: 0 })
-  golden_coin_profit: number;
-
-  @Prop({ default: 0 })
-  diamond_coin_profit: number;
+  coin_profit: number;
 }
 
 const GameDoubleSchema = SchemaFactory.createForClass(GameDouble);
